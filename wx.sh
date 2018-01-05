@@ -2,7 +2,8 @@
 
 icao=()
 
-metarurl='-O- -q http://tgftp.nws.noaa.gov/data/observations/metar/stations/__station__.TXT'
+wgetoptions='-O- -q'
+metarurl='http://tgftp.nws.noaa.gov/data/observations/metar/stations/__station__.TXT'
 
 for input in "$@"
 do
@@ -14,9 +15,8 @@ do
   fi
 done
 
-
 for i in ${icao[@]}
 do
   finalurl="${metarurl/__station__/$i}"
-  wget $finalurl | grep $i
+  wget $wgetoptions $finalurl | grep $i
 done
